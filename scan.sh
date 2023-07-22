@@ -22,14 +22,15 @@ COLOR_MODE="$COLOR_COLOR"
 echo "Scan options:"
 echo "  Paper Size: $PAPER_WIDTH x $PAPER_HEIGHT"
 echo "  Resolution: $RESOLUTION (dpi)"
-if [ "$DUPLEX" = "$TRUE" ]; then
+if [ "$SOURCE" = "$SOURCE_DUPLEX" ]; then
   echo "  Duplex: yes"
-  SOURCE="$SOURCE_DUPLEX"
-else
+elif [ "$SOURCE" = "$SOURCE_SIMPLEX" ] ; then
   echo "  Duplex: no"
-  SOURCE="$SOURCE_SIMPLEX"
+elif [ "$SOURCE" = "$SOURCE_FLATBED" ] ; then
+  echo "  Flatbed"
+else
+  echo "  UNKNOWN SOURCE!"
 fi
-#SOURCE="$SOURCE_FLATBED"
 echo "  Color mode: $COLOR_MODE"
 echo "Hit return to continue"
 read dummy
