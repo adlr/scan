@@ -19,12 +19,16 @@ SOURCE_FLATBED="Flatbed"
 SOURCE="${SOURCE:-${SOURCE_FLATBED}}"
 COLOR_MODE="$COLOR_COLOR"
 
+USING_ADF=0
+
 echo "Scan options:"
 echo "  Paper Size: $PAPER_WIDTH x $PAPER_HEIGHT"
 echo "  Resolution: $RESOLUTION (dpi)"
 if [ "$SOURCE" = "$SOURCE_DUPLEX" ]; then
+  USING_ADF=1
   echo "  Duplex: yes"
 elif [ "$SOURCE" = "$SOURCE_SIMPLEX" ] ; then
+  USING_ADF=1
   echo "  Duplex: no"
 elif [ "$SOURCE" = "$SOURCE_FLATBED" ] ; then
   echo "  Flatbed"
@@ -32,6 +36,9 @@ else
   echo "  UNKNOWN SOURCE!"
 fi
 echo "  Color mode: $COLOR_MODE"
+if [ $USING_ADF = "1" ] ; then
+  echo "  ADF Warning: If too many pages loaded, it will use flatbed"
+fi
 echo "Hit return to continue"
 read dummy
 
